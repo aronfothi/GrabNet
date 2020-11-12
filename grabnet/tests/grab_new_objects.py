@@ -212,7 +212,7 @@ def vis_results(dorig, coarse_net, refine_net, rh_model , save=False, save_dir =
                     offset = dorig['offset'][cId]
                     obj_mesh.v += offset
                     hand_mesh_gen_rnet.v += offset
-                    smplx_mesh.v += [[ 1.0 -1.00 -1.000]]
+                    smplx_mesh.v += offset
 
                 if 'full_rescale' in dorig:
                     full_rescale = dorig['full_rescale'][cId]
@@ -234,10 +234,11 @@ def vis_results(dorig, coarse_net, refine_net, rh_model , save=False, save_dir =
                 #mvs[0][cId].set_static_meshes([smplx_mesh], blocking=True)
 
                 if save:
-                    save_path = os.path.join(save_dir, str(cId))
+                    save_path = os.path.join(save_dir, str(cId), str(frame))
                     makepath(save_path)
                     hand_mesh_gen_rnet.write_obj(filename=save_path + '/rh_mesh_gen_%d.obj' % cId)
                     obj_mesh.write_obj(filename=save_path + '/obj_mesh_%d.obj' % cId)
+                    smplx_mesh.write_obj(filename=save_path + '/smplx_mesh_%d.obj' % cId)
 
 
 
